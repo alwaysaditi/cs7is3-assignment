@@ -165,7 +165,7 @@ int count = 0;
             
                 {
                    // System.out.println("qno = "+qno+" query= "+queryString);
-                    QuerySearcher.searchQuery(processedQuery,qno);
+                    QuerySearcher.searchQuery(queryString,qno);
                 }
                 qno = line.split(" ")[1];
                 count++;
