@@ -89,7 +89,9 @@ public class LuceneIndexer {
                             Document d = createDocument(id,title,author,bib,content);
                             writer.addDocument(d);
                         }
-                        else{ first=false; }
+                        else{ 
+                            first=false; 
+                        }
                         title = ""; author = ""; bib = ""; content = "";
                         id = line.substring(3,line.length()); break;
                     case ".T":
@@ -163,13 +165,16 @@ int count = 0;
                  //   //performSearch(searcher,writer,queryNumber,query);
                     queryNumber++;
                 }
-                else{ first=false; }
+                else{
+                    String qno = line.substring(4,7);
+                    first=false;
+                }
                // System.out.println("query here = "+queryString);
                 String processedQuery = processQuery(queryString);
                // System.out.println("processed Query "+processedQuery);
 //if(count ==55)
 {
-    QuerySearcher.searchQuery(processedQuery);
+    QuerySearcher.searchQuery(processedQuery,qno);
 }
                    count++;
                 queryString = "";
