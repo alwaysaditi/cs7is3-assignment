@@ -59,7 +59,6 @@ public class LuceneIndexer {
                     .addTokenFilter(LowerCaseFilterFactory.class) // Convert tokens to lowercase
                     .addTokenFilter(StopFilterFactory.class)
                     .addTokenFilter(LengthFilterFactory.class, "min", "2", "max", "20")
-                    //.addTokenFilter(PatternReplaceFilterFactory.class, "pattern", "\\d+", "replacement", "") // Remove numerical tokens// Use default English stop words// Apply Porter Stemming
                     .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -107,7 +106,7 @@ public class LuceneIndexer {
                         }
                 }
             }
-            System.out.println(content);
+            //System.out.println(content);
             Document d = createDocument(id,title,author,bib,content);
             writer.addDocument(d);
         }
@@ -122,11 +121,10 @@ public class LuceneIndexer {
             // Get the CharTermAttribute from the token stream
             CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
 
-            // You need to call reset before using the TokenStream
+           
             tokenStream.reset();
 
-            // Iterate over the tokens
-            System.out.println("Tokens:");
+           // System.out.println("Tokens:");
             while (tokenStream.incrementToken()) {
                 String token = charTermAttribute.toString();
                // System.out.println(token); // Print the processed token
@@ -169,14 +167,11 @@ int count = 0;
                // System.out.println("query here = "+queryString);
                 String processedQuery = processQuery(queryString);
                 System.out.println("processed Query "+processedQuery);
-if(count ==55)
+//if(count ==55)
 {
     QuerySearcher.searchQuery(processedQuery);
 }
-
-
-
-                count++;
+                   count++;
                 queryString = "";
 
 
@@ -187,11 +182,7 @@ if(count ==55)
             }
 
         }
-        //System.out.println(queryString);
-
-//        Query query = parser.parse(QueryParser.escape(queryString));
-//        System.out.println(query.getClass());
-
+   
 
         reader.close();
     }
@@ -206,7 +197,7 @@ if(count ==55)
         doc.add(new TextField("bibliography", bib, Field.Store.YES));
         Field field = new Field(CONTENT, content, TYPE_STORED);
         doc.add(field);
-        //doc.add(new TextField("content", content, TYPE_STORED));
+   
         return doc;
     }
     public static void main(String[] args) {
@@ -245,8 +236,6 @@ if(count ==55)
    } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-//        catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
+
     }
 }
