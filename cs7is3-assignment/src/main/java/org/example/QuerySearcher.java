@@ -39,26 +39,24 @@ public class QuerySearcher {
                 //System.out.println("Term Frequencies for Document " + docId + ": " + termFrequencies);
                 // System.out.println("Query Frequencies: " + queryFrequencies);
 
-                // Print the global terms set
-                //System.out.println("Terms Global HashSet: " + termsglobal);
+              
                 v1 = toRealVector(queryFrequencies);
                 v2 = toRealVector(termFrequencies);
-//System.out.println(v1);
-//System.out.println(v2);
+
                 // Calculate the cosine similarity score
-                double cosineSimilarityScore = getCosineSimilarity(v1, v2); // Assuming you have this method
-                System.out.println("Term Frequencies for Document " +docId+1 + ": " + termFrequencies);
-                System.out.println("Query Frequencies: " + queryFrequencies);
+                double cosineSimilarityScore = getCosineSimilarity(v1, v2); 
+                // System.out.println("Term Frequencies for Document " +docId+1 + ": " + termFrequencies);
+                // System.out.println("Query Frequencies: " + queryFrequencies);
 
                  //Print the global terms set
-                System.out.println("Terms Global HashSet: " + termsglobal);
-                System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
+                // System.out.println("Terms Global HashSet: " + termsglobal);
+                // System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
 
                                 Set<String> commonKeys = new HashSet<>(termFrequencies.keySet());  // Make a copy of keys1
                 commonKeys.retainAll(queryFrequencies.keySet());  // Retains only the common elements with keys2
 
                 // Print the common keys
-                System.out.println("Common keys: " + commonKeys);
+              //  System.out.println("Common keys: " + commonKeys);
                 // Store the score and document ID in the list
                 scoreList.add(new AbstractMap.SimpleEntry<>(docId+1, cosineSimilarityScore));
 //System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
@@ -90,7 +88,7 @@ public class QuerySearcher {
     {
         Map<String, Integer> frequencies = new HashMap<>();
 
-        // Split the query into terms (you may want to modify this based on your tokenizer)
+     
         String[] splitTerms = query.split("\\s+"); // Split by whitespace
 
         for (String term : splitTerms) {
