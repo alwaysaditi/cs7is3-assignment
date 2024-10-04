@@ -161,28 +161,17 @@ int count = 0;
         while ((line = buffer.readLine()) != null){
 //if (count==226) break;
             if(line.substring(0,2).equals(".I")){
-                 qno = line.split(" ")[1];
-                if(!first){
-                    Query query = parser.parse(QueryParser.escape(queryString));
-                     
-                 //   //performSearch(searcher,writer,queryNumber,query);
-                    queryNumber++;
+                if(line.substring(0,2).equals(".I")){
+            
+                {
+                   // System.out.println("qno = "+qno+" query= "+queryString);
+                    QuerySearcher.searchQuery(processedQuery,qno);
                 }
-                else{
-                    first=false;
-                }
-               // System.out.println("query here = "+queryString);
-                String processedQuery = processQuery(queryString);
-               // System.out.println("processed Query "+processedQuery);
-//if(count ==55)
-{
-    QuerySearcher.searchQuery(processedQuery,qno);
-}
-                   count++;
+                qno = line.split(" ")[1];
+                count++;
                 queryString = "";
-
-
             }
+      }
             else if(line.substring(0,2).equals(".W")) continue;
             else {
                 queryString += " " + line;
