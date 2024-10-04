@@ -167,7 +167,7 @@ int count = 0;
                     queryNumber++;
                 }
                 else{
-                    String qno = line.substring(4,7);
+                    qno = line.substring(4,7);
                     first=false;
                 }
                // System.out.println("query here = "+queryString);
