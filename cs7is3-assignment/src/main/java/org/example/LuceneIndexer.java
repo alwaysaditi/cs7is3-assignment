@@ -167,7 +167,7 @@ int count = 0;
                     queryNumber++;
                 }
                 else{
-                    qno = line.substring(4,7);
+                    qno = line.split(" ")[1];
                     first=false;
                 }
                // System.out.println("query here = "+queryString);
