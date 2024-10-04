@@ -161,12 +161,11 @@ int count = 0;
         while ((line = buffer.readLine()) != null){
 //if (count==226) break;
             if(line.substring(0,2).equals(".I")){
-                if(line.substring(0,2).equals(".I")){
-            
-                {
+
                    // System.out.println("qno = "+qno+" query= "+queryString);
-                    QuerySearcher.searchQuery(queryString,qno);
-                }
+                String processedQuery = processQuery(queryString);
+                    QuerySearcher.searchQuery(processedQuery,qno);
+                
                 qno = line.split(" ")[1];
                 count++;
                 queryString = "";
