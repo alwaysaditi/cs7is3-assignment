@@ -15,7 +15,7 @@ import static org.example.IndexViewer.*;
 public class QuerySearcher {
     // int[] numbers = new int[1401]; // Create an array of size 1401
 
-    public static void searchQuery(String queryString)
+    public static void searchQuery(String queryString, String qno)
     {
 
         Map<Integer, Double> topFiveDocs = new HashMap<>();
@@ -73,7 +73,7 @@ public class QuerySearcher {
         }
 
         // Print the top five documents and their scores
-        System.out.println("ALL SCORES for QUERY: "+queryString);
+        System.out.println("ALL SCORES for QUERY: "+queryString+" with query number: "+qno);
         for(int i=0; i<50;i++)
         {
             System.out.println(scoreList.get(i).getKey()+": "+scoreList.get(i).getValue());
