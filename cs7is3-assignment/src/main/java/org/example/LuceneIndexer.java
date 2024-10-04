@@ -170,7 +170,7 @@ int count = 0;
                 count++;
                 queryString = "";
             }
-      }
+      
             else if(line.substring(0,2).equals(".W")) continue;
             else {
                 queryString += " " + line;
