@@ -166,7 +166,7 @@ int count = 0;
                 else{ first=false; }
                // System.out.println("query here = "+queryString);
                 String processedQuery = processQuery(queryString);
-                System.out.println("processed Query "+processedQuery);
+               // System.out.println("processed Query "+processedQuery);
 //if(count ==55)
 {
     QuerySearcher.searchQuery(processedQuery);
