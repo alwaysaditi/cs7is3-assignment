@@ -163,6 +163,7 @@ int count = 0;
             if(line.substring(0,2).equals(".I")){
                 if(!first){
                     Query query = parser.parse(QueryParser.escape(queryString));
+                     qno = line.split(" ")[1];
                  //   //performSearch(searcher,writer,queryNumber,query);
                     queryNumber++;
                 }
