@@ -6,6 +6,9 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
@@ -15,17 +18,29 @@ import static org.example.IndexViewer.*;
 public class QuerySearcher {
     // int[] numbers = new int[1401]; // Create an array of size 1401
 
-    public static void searchQuery(String queryString, String qno)
-    {
+    public static void searchQuery(String queryString, String qno, int actual) throws IOException {
 
         Map<Integer, Double> topFiveDocs = new HashMap<>();
 
         List<Map.Entry<Integer, Double>> scoreList = new ArrayList<>();
 
+        String filePath = "output/custom_similarity.txt";
+        File outputFile = new File(filePath);
+        if (outputFile.exists() && actual ==0) {
+            // Delete the file
+            outputFile.delete();
+            System.out.println("Existing file deleted.");
+            return;
+        }
+
+        // Create the output file (this will create the file if it doesn't exist)
+        outputFile.createNewFile();
+        System.out.println("New file created.");
+
         for (int i = 0; i <= 1399; i++) {
             termsglobal.clear();
-            String indexPath = "new_index"; // Path to your index directory
-            int docId = i; // Replace with the actual document ID you want to retrieve
+            String indexPath = "new_index";
+            int docId = i;
             Map<String, Integer> queryFrequencies = getQueryFrequencies(queryString);
             RealVector v1  ;
             RealVector v2 ;
@@ -36,8 +51,7 @@ public class QuerySearcher {
 
                 // Retrieve term frequencies for the specified document ID
                 Map<String, Integer> termFrequencies = getTermFrequencies(reader, docId);
-                //System.out.println("Term Frequencies for Document " + docId + ": " + termFrequencies);
-                // System.out.println("Query Frequencies: " + queryFrequencies);
+
 
               
                 v1 = toRealVector(queryFrequencies);
@@ -71,13 +85,29 @@ public class QuerySearcher {
             Map.Entry<Integer, Double> entry = scoreList.get(j);
             topFiveDocs.put(entry.getKey(), entry.getValue());
         }
+        StringBuilder output = new StringBuilder();
 
-        // Print the top five documents and their scores
-        System.out.println("ALL SCORES for QUERY: "+queryString+" with query number: "+qno);
-        for(int i=0; i<50;i++)
-        {
-            System.out.println(scoreList.get(i).getKey()+": "+scoreList.get(i).getValue());
+
+        // Building the content to append
+//        output.append("ALL SCORES for QUERY: ").append(queryString)
+//                .append(" with query number: ").append(qno)
+               output .append(" actual query number: ").append(actual)
+                .append("\n");
+
+        // Append score entries (up to 50)
+        for (int i = 0; i < 50 && i < scoreList.size(); i++) {
+            output.append(scoreList.get(i).getKey()).append(": ")
+                    .append(scoreList.get(i).getValue()).append("\n");
         }
+
+        // File path where you want to write the output
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
+            writer.write(output.toString());
+            writer.newLine(); // Write a new line after each content
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     static double getCosineSimilarity(RealVector v1, RealVector v2) {
