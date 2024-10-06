@@ -164,7 +164,8 @@ int count = 0;
 
                    // System.out.println("qno = "+qno+" query= "+queryString);
                 String processedQuery = processQuery(queryString);
-                    QuerySearcher.searchQuery(processedQuery,qno);
+                    QuerySearcher.searchQuery(processedQuery,qno,count);
+                    BM25Searcher.search(processedQuery,count);
                 
                 qno = line.split(" ")[1];
                 count++;
