@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
 
+//import static jdk.internal.org.jline.utils.AttributedStringBuilder.append;
 import static org.example.IndexViewer.*;
 
 public class QuerySearcher {
@@ -24,7 +25,7 @@ public class QuerySearcher {
 
         List<Map.Entry<Integer, Double>> scoreList = new ArrayList<>();
 
-        String filePath = "output/custom_similarity.txt";
+        String filePath = "cs7is3-assignment-main/cs7is3-assignment/output/custom_similarity.txt";
         File outputFile = new File(filePath);
         if (outputFile.exists() && actual ==0) {
             // Delete the file
@@ -72,7 +73,7 @@ public class QuerySearcher {
                 // Print the common keys
               //  System.out.println("Common keys: " + commonKeys);
                 // Store the score and document ID in the list
-                scoreList.add(new AbstractMap.SimpleEntry<>(docId+1, cosineSimilarityScore));
+                scoreList.add(new AbstractMap.SimpleEntry<>(docId, cosineSimilarityScore));
 //System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
                 reader.close(); // Close the index reader
             } catch (IOException e) {
@@ -91,19 +92,24 @@ public class QuerySearcher {
         // Building the content to append
 //        output.append("ALL SCORES for QUERY: ").append(queryString)
 //                .append(" with query number: ").append(qno)
-               output .append(" actual query number: ").append(actual)
-                .append("\n");
+//               output .append(" actual query number: ").append(actual)
+//                .append("\n");
 
         // Append score entries (up to 50)
-        for (int i = 0; i < 50 && i < scoreList.size(); i++) {
-            output.append(scoreList.get(i).getKey()).append(": ")
-                    .append(scoreList.get(i).getValue()).append("\n");
+        for (int i = 2; i < 52 && i < scoreList.size(); i++) {
+            output.append(actual + " ") //query number
+                    .append("0 ") //0
+                    .append(scoreList.get(i).getKey()).append(" ") // document ID
+                    .append(i-2+" ")//rank
+                    .append(scoreList.get(i).getValue()+ " ")//score
+                    .append("EXP")
+                    .append("\n");
         }
 
         // File path where you want to write the output
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
             writer.write(output.toString());
-            writer.newLine(); // Write a new line after each content
+            //writer.newLine(); // Write a new line after each content
         } catch (IOException e) {
             e.printStackTrace();
         }
