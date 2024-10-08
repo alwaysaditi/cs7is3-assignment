@@ -41,7 +41,7 @@ public class QuerySearcher {
         for (int i = 0; i <= 1399; i++) {
             termsglobal.clear();
             String indexPath = "new_index";
-            int docId = i+1;
+            int docId = i;
             Map<String, Integer> queryFrequencies = getQueryFrequencies(queryString);
             RealVector v1  ;
             RealVector v2 ;
@@ -73,7 +73,7 @@ public class QuerySearcher {
                 // Print the common keys
               //  System.out.println("Common keys: " + commonKeys);
                 // Store the score and document ID in the list
-                scoreList.add(new AbstractMap.SimpleEntry<>(docId, cosineSimilarityScore));
+                scoreList.add(new AbstractMap.SimpleEntry<>(docId+1, cosineSimilarityScore));
 //System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
                 reader.close(); // Close the index reader
             } catch (IOException e) {
