@@ -75,7 +75,7 @@ public class BM25Searcher {
             }
 
             // Normalize scores
-            int r = 0;
+            int r = 1;
             Map<Integer, Double> normalizedScores = normalizeScores(docScores);
             List<Map.Entry<Integer, Double>> sortedEntries = new ArrayList<>(normalizedScores.entrySet());
             sortedEntries.sort((entry1, entry2) -> Double.compare(entry2.getValue(), entry1.getValue()));
