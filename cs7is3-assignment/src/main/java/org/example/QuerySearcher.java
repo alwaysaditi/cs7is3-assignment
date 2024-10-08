@@ -41,7 +41,7 @@ public class QuerySearcher {
         for (int i = 0; i <= 1399; i++) {
             termsglobal.clear();
             String indexPath = "new_index";
-            int docId = i;
+            int docId = i+1;
             Map<String, Integer> queryFrequencies = getQueryFrequencies(queryString);
             RealVector v1  ;
             RealVector v2 ;
