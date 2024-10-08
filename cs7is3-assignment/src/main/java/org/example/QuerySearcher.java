@@ -100,7 +100,7 @@ public class QuerySearcher {
             output.append(actual + " ") //query number
                     .append("0 ") //0
                     .append(scoreList.get(i).getKey()).append(" ") // document ID
-                    .append(i-2+" ")//rank
+                    .append(i-1+" ")//rank
                     .append(scoreList.get(i).getValue()+ " ")//score
                     .append("EXP")
                     .append("\n");
