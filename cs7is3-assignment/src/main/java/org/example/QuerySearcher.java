@@ -34,7 +34,7 @@ System.out.println("actual here= "+actual+" query=  "+queryString);
             return;
         }
 
-        // Create the output file (this will create the file if it doesn't exist)
+    
         outputFile.createNewFile();
         System.out.println("New file created.");
 
