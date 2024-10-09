@@ -156,6 +156,7 @@ public class LuceneIndexer {
         Boolean first = true;
         String qno = "";
 int count = 0;
+         String processedQuery = "";
         //System.out.println("Reading in queries and creating search results.");
 
 //         while ((line = buffer.readLine()) != null){
