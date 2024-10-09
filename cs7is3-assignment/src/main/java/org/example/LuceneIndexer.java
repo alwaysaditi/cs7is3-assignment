@@ -158,25 +158,44 @@ public class LuceneIndexer {
 int count = 0;
         //System.out.println("Reading in queries and creating search results.");
 
-        while ((line = buffer.readLine()) != null){
-//if (count==226) break;
-            if(line.substring(0,2).equals(".I")){
+//         while ((line = buffer.readLine()) != null){
+// //if (count==226) break;
+//             if(line.substring(0,2).equals(".I")){
 
-                   // System.out.println("qno = "+qno+" query= "+queryString);
-                String processedQuery = processQuery(queryString);
-                    QuerySearcher.searchQuery(processedQuery,qno,count);
-                    BM25Searcher.search(processedQuery,count);
+//                    // System.out.println("qno = "+qno+" query= "+queryString);
+//                 String processedQuery = processQuery(queryString);
+//                     QuerySearcher.searchQuery(processedQuery,qno,count);
+//                     BM25Searcher.search(processedQuery,count);
                 
-                qno = line.split(" ")[1];
-                count++;
-                queryString = "";
-            }
+//                 qno = line.split(" ")[1];
+//                 count++;
+//                 queryString = "";
+//             }
       
-            else if(line.substring(0,2).equals(".W")) continue;
-            else {
+//             else if(line.substring(0,2).equals(".W")) continue;
+//             else {
+//                 queryString += " " + line;
+//             }
+
+//         }
+
+             while ((line = buffer.readLine()) != null) {
+            if (line.substring(0, 2).equals(".I")) {
+                // Process the current query before resetting for the next one
+                if (!queryString.isEmpty()) {
+                    System.out.println("qno = " + qno + " query= " + queryString);
+                    processedQuery = processQuery(queryString);
+                   // System.out.println(processedQuery);
+                    // Uncomment these when you want to search:
+                     QuerySearcher.searchQuery(processedQuery, qno, count);
+                     BM25Searcher.search(processedQuery, count);
+                    count++;
+                }
+                qno = line.split(" ")[1]; // Reset for new query
+                queryString = "";          // Reset query string
+            } else if (!line.substring(0, 2).equals(".W")) {
                 queryString += " " + line;
             }
-
         }
    
 
