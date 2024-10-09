@@ -35,7 +35,7 @@ public class BM25Searcher {
             return;
         }
 
-        // Create the output file (this will create the file if it doesn't exist)
+   
         outputFile.createNewFile();
         System.out.println("New file created.");
 
@@ -51,7 +51,7 @@ public class BM25Searcher {
             IndexSearcher searcher = new IndexSearcher(reader);
             System.out.println(query);
 
-            // If BM25 is the default similarity, no need to set it explicitly
+           
             searcher.setSimilarity(new BM25Similarity());
 
             // Loop through the 225 preprocessed queries
@@ -101,7 +101,7 @@ public class BM25Searcher {
 
 
 
-            // Close reader
+           
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
