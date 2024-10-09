@@ -22,10 +22,10 @@ public class QuerySearcher {
     public static void searchQuery(String queryString, String qno, int actual) throws IOException {
 
         Map<Integer, Double> topFiveDocs = new HashMap<>();
-
+System.out.println("actual here= "+actual);
         List<Map.Entry<Integer, Double>> scoreList = new ArrayList<>();
 
-        String filePath = "output/custom_similarity.txt";
+        String filePath = "cs7is3-assignment-main/cs7is3-assignment/output/custom_similarity.txt";
         File outputFile = new File(filePath);
         if (outputFile.exists() && actual ==0) {
             // Delete the file
@@ -54,24 +54,24 @@ public class QuerySearcher {
                 Map<String, Integer> termFrequencies = getTermFrequencies(reader, docId);
 
 
-              
+
                 v1 = toRealVector(queryFrequencies);
                 v2 = toRealVector(termFrequencies);
 
                 // Calculate the cosine similarity score
-                double cosineSimilarityScore = getCosineSimilarity(v1, v2); 
+                double cosineSimilarityScore = getCosineSimilarity(v1, v2);
                 // System.out.println("Term Frequencies for Document " +docId+1 + ": " + termFrequencies);
                 // System.out.println("Query Frequencies: " + queryFrequencies);
 
-                 //Print the global terms set
+                //Print the global terms set
                 // System.out.println("Terms Global HashSet: " + termsglobal);
                 // System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
 
-                                Set<String> commonKeys = new HashSet<>(termFrequencies.keySet());  // Make a copy of keys1
+                Set<String> commonKeys = new HashSet<>(termFrequencies.keySet());  // Make a copy of keys1
                 commonKeys.retainAll(queryFrequencies.keySet());  // Retains only the common elements with keys2
 
                 // Print the common keys
-              //  System.out.println("Common keys: " + commonKeys);
+                //  System.out.println("Common keys: " + commonKeys);
                 // Store the score and document ID in the list
                 scoreList.add(new AbstractMap.SimpleEntry<>(docId+1, cosineSimilarityScore));
 //System.out.println("size ofmap1= "+termFrequencies.size()+" size of map2 = "+queryFrequencies.size()+" size of hashset = "+termsglobal.size());
@@ -89,14 +89,8 @@ public class QuerySearcher {
         StringBuilder output = new StringBuilder();
 
 
-        // Building the content to append
-//        output.append("ALL SCORES for QUERY: ").append(queryString)
-//                .append(" with query number: ").append(qno)
-//               output .append(" actual query number: ").append(actual)
-//                .append("\n");
-
-        // Append score entries (up to 50)
         for (int i = 2; i < 52 && i < scoreList.size(); i++) {
+            //int qnum = actual+1;
             output.append(actual + " ") //query number
                     .append("0 ") //0
                     .append(scoreList.get(i).getKey()).append(" ") // document ID
@@ -124,7 +118,7 @@ public class QuerySearcher {
     {
         Map<String, Integer> frequencies = new HashMap<>();
 
-     
+
         String[] splitTerms = query.split("\\s+"); // Split by whitespace
 
         for (String term : splitTerms) {
