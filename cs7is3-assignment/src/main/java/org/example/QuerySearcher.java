@@ -22,10 +22,10 @@ public class QuerySearcher {
     public static void searchQuery(String queryString, String qno, int actual) throws IOException {
 
         Map<Integer, Double> topFiveDocs = new HashMap<>();
-System.out.println("actual here= "+actual);
+System.out.println("actual here= "+actual+" query=  "+queryString);
         List<Map.Entry<Integer, Double>> scoreList = new ArrayList<>();
 
-        String filePath = "output/custom_similarity.txt";
+        String filePath = "cs7is3-assignment-main/cs7is3-assignment/output/custom_similarity.txt";
         File outputFile = new File(filePath);
         if (outputFile.exists() && actual ==0) {
             // Delete the file
@@ -100,7 +100,6 @@ System.out.println("actual here= "+actual);
                     .append("\n");
         }
 
-        // File path where you want to write the output
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true))) {
             writer.write(output.toString());
             //writer.newLine(); // Write a new line after each content
