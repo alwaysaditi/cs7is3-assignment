@@ -189,7 +189,7 @@ int count = 0;
                    // System.out.println(processedQuery);
                     // Uncomment these when you want to search:
                      QuerySearcher.searchQuery(processedQuery, qno, count);
-                     BM25Searcher.search(processedQuery, count);
+                  //   BM25Searcher.search(processedQuery, count);
                     count++;
                 }
                 qno = line.split(" ")[1]; // Reset for new query
@@ -206,7 +206,7 @@ int count = 0;
             System.out.println(processedQuery);
             // Uncomment these when you want to search:
              QuerySearcher.searchQuery(processedQuery, qno, count);
-             BM25Searcher.search(processedQuery, count);
+            // BM25Searcher.search(processedQuery, count);
         }
    
 
