@@ -54,8 +54,8 @@ public class IndexViewer {
         return (RealVector) vector.mapDivide(vector.getL1Norm());
     }
     public static void main(String[] args) {
-        String indexPath = "index"; // Path to your index directory
-        int docId = 0; // Replace with the actual document ID you want to retrieve
+        String indexPath = "index"; 
+        int docId = 0; 
 
         try {
             // Open the index directory
