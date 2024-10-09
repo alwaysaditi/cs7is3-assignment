@@ -198,6 +198,16 @@ int count = 0;
                 queryString += " " + line;
             }
         }
+
+        // Process the last query after the loop ends
+        if (!queryString.isEmpty()) {
+            System.out.println("qno = " + qno + " query= " + queryString);
+            processedQuery = processQuery(queryString);
+            System.out.println(processedQuery);
+            // Uncomment these when you want to search:
+             QuerySearcher.searchQuery(processedQuery, qno, count);
+             BM25Searcher.search(processedQuery, count);
+        }
    
 
         reader.close();
