@@ -59,6 +59,7 @@ public class LuceneIndexer {
                     .addTokenFilter(LowerCaseFilterFactory.class) // Convert tokens to lowercase
                     .addTokenFilter(StopFilterFactory.class)
                     .addTokenFilter(LengthFilterFactory.class, "min", "2", "max", "20")
+                    .addTokenFilter(PorterStemFilterFactory.class)
                     .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
